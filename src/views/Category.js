@@ -8,20 +8,22 @@ import { Helmet } from 'react-helmet'
 import GridRenderer from '../components/GridTypes/GridRenderer'
 import Error from '../components/Error'
 
-const Category = ({ data, viewtype, searchposts, match}) =>
-  RenderLayout(data, searchposts, viewtype, match)
+const Category = ({ data, match, viewtype, searchposts }) =>
+  RenderLayout(data, match, searchposts, viewtype)
 const AllPosts = ({ data, viewtype, searchposts }) =>
   RenderLayout(data, searchposts, viewtype)
-
-const RenderLayout = (data, viewtype) => {
+let queryString = ''
+const RenderLayout = (data, match, viewtype) => {
   const isLoading = !data.posts
+  if(match)
+    queryString = match.params.slug
   return (
     <Layout>
-      {!data.error && isLoading && <Loader/>}
-      {data.error && <Error error={data.error.message}/>}
-      {!isLoading && data.posts.edges.length === 0 && <CategoryError/>}
+      {!data.error && isLoading && <Loader />}
+      {data.error && <Error error={data.error.message} />}
+      {!isLoading && data.posts.edges.length === 0 && <CategoryError />}
       {!isLoading && data.posts.edges.length > 0 && (
-        <RenderCategories data={data} viewtype={viewtype}/>
+        <RenderCategories data={data} viewtype={viewtype} />
       )}
     </Layout>
   )
@@ -40,9 +42,8 @@ const CategoryError = () => {
     </div>
   )
 }
-const queryParam = 'tutorials'
 
-const RenderCategories = ({ data, searchposts, viewtype, match }) => {
+const RenderCategories = ({ data, searchposts, viewtype }) => {
   const posts = searchposts || data.posts
 
   return (
@@ -52,7 +53,7 @@ const RenderCategories = ({ data, searchposts, viewtype, match }) => {
           Posts By Categories | Bulletin - Franciscan University of Steubenville
         </title>
       </Helmet>
-      <GridRenderer posts={posts} viewtype={viewtype} query={getPostsByCat} where={''}/>
+      <GridRenderer posts={posts} viewtype={viewtype} query={getPostsByCat} where={queryString} />
     </div>
   )
 }

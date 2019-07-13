@@ -28,12 +28,11 @@ class ListView extends React.Component {
       document.documentElement.clientHeight || window.innerHeight
     var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight
     if (scrolledToBottom) {
-      if (this.props.posts.pageInfo.hasNextPage)
-      {
+      if (this.props.posts.pageInfo.hasNextPage) {
         this.props.onLoadMore()
-        this.setState({loadingFinished: false})
+        this.setState({ loadingFinished: false })
       }
-      else this.setState({loadingFinished: true})
+      else this.setState({ loadingFinished: true })
     }
   }
 
@@ -61,7 +60,7 @@ class ListView extends React.Component {
           </Grid>
         </Grid>
         {(this.props.loading) && <h2>Loading...</h2>}
-        {!this.state.loadingFinished && <a href={'#'} onClick={this.props.onLoadMore}>Load more</a>}
+        {!this.state.loadingFinished && <a href={'javascript:;'} onClick={this.props.onLoadMore}>Load more</a>}
       </div>
     )
   }

@@ -159,6 +159,7 @@ class Layout extends Component {
               this.props.children.map((child, i) => {
                   if (child) {
                     return React.cloneElement(child, {
+                      match: this.props.match,
                       viewtype: this.state.viewtype,
                       searchposts: this.state.searchPosts,
                       key: i
