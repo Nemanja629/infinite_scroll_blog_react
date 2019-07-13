@@ -1,0 +1,93 @@
+{
+  "name": "student-bulletin-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "7.0.0-beta.55",
+    "@material-ui/core": "^4.0.2",
+    "@material-ui/icons": "^4.1.0",
+    "apollo-boost": "^0.3.1",
+    "apollo-server-express": "^2.5.0",
+    "concurrently": "^4.1.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "graphql": "^14.3.1",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.4",
+    "he": "^1.2.0",
+    "html-to-text": "^5.1.1",
+    "lodash.debounce": "^4.0.8",
+    "material-ui": "^1.0.0-beta.47",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "moment": "^2.24.0",
+    "multer": "^1.4.1",
+    "nodemailer": "^6.2.1",
+    "nodemon": "^1.19.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.0.0",
+    "react-apollo": "^2.5.5",
+    "react-dom": "^16.0.0",
+    "react-helmet": "^5.2.1",
+    "react-jotform-embed": "^1.0.4",
+    "react-masonry-component": "^6.2.1",
+    "react-router-dom": "^5.0.0",
+    "react-sanitized-html": "^2.0.0",
+    "react-scripts": "^3.0.1",
+    "sanitize-html": "^1.20.1",
+    "typeface-roboto": "^0.0.54"
+  },
+  "scripts": {
+    "start-front": "react-scripts start",
+    "start-back-dev": "nodemon --watch server/*.js ./server/app.js",
+    "start-back": "node ./server/app.js",
+    "start": "concurrently 'npm run start-front' 'npm run start-back-dev' ",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "prettier 'src/**/*.js' 'src/components/**/*.js' '*.js' --write --config .prettierrc && standard --fix",
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "cross-env": "^5.0.1",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
+    "node-fetch": "^2.6.0",
+    "npm-run-all": "^4.0.2",
+    "prettier": "^1.5.3",
+    "standard": "^12.0.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --single-quote --no-semi",
+      "standard --fix",
+      "git add"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "fetch",
+      "FormData",
+      "it",
+      "state",
+      "URL",
+      "renderPost",
+      "handleClick",
+      "handleRequestClose"
+    ],
+    "parser": "babel-eslint"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
