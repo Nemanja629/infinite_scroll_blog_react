@@ -5,7 +5,10 @@ import PostPreview from '../PostPreview'
 
 class GridView extends React.Component {
 
+  state = {
+    loadingFinished: false
 
+  }
   componentDidMount () {
     window.addEventListener('scroll', this.handleOnScroll)
   }
@@ -27,7 +30,11 @@ class GridView extends React.Component {
     var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight
     if (scrolledToBottom) {
       if (this.props.posts.pageInfo.hasNextPage)
+      {
         this.props.onLoadMore()
+        this.setState({loadingFinished: false})
+      }
+      else this.setState({loadingFinished: true})
     }
   }
 
@@ -55,7 +62,8 @@ class GridView extends React.Component {
             ))}
           </Masonry>
         </div>
-        {(this.props.loading) && <h2>Loading...</h2>}
+        {(this.props.loading) && <h2 >Loading ...</h2>}
+        {!this.state.loadingFinished && <a href={'#'} onClick={this.props.onLoadMore}>Load more</a>}
       </div>
     )
   }

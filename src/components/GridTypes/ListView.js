@@ -4,8 +4,7 @@ import PostPreview from '../PostPreview'
 
 class ListView extends React.Component {
   state = {
-    postLength: 0,
-    isLoadingFinished: false
+    loadingFinished: false
   }
 
   componentDidMount () {
@@ -30,7 +29,11 @@ class ListView extends React.Component {
     var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight
     if (scrolledToBottom) {
       if (this.props.posts.pageInfo.hasNextPage)
+      {
         this.props.onLoadMore()
+        this.setState({loadingFinished: false})
+      }
+      else this.setState({loadingFinished: true})
     }
   }
 
@@ -58,6 +61,7 @@ class ListView extends React.Component {
           </Grid>
         </Grid>
         {(this.props.loading) && <h2>Loading...</h2>}
+        {!this.state.loadingFinished && <a href={'#'} onClick={this.props.onLoadMore}>Load more</a>}
       </div>
     )
   }

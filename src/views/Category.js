@@ -8,8 +8,8 @@ import { Helmet } from 'react-helmet'
 import GridRenderer from '../components/GridTypes/GridRenderer'
 import Error from '../components/Error'
 
-const Category = ({ data, viewtype, searchposts }) =>
-  RenderLayout(data, searchposts, viewtype)
+const Category = ({ data, viewtype, searchposts, match}) =>
+  RenderLayout(data, searchposts, viewtype, match)
 const AllPosts = ({ data, viewtype, searchposts }) =>
   RenderLayout(data, searchposts, viewtype)
 
@@ -17,11 +17,11 @@ const RenderLayout = (data, viewtype) => {
   const isLoading = !data.posts
   return (
     <Layout>
-      {!data.error && isLoading && <Loader />}
-      {data.error && <Error error={data.error.message} />}
-      {!isLoading && data.posts.edges.length === 0 && <CategoryError />}
+      {!data.error && isLoading && <Loader/>}
+      {data.error && <Error error={data.error.message}/>}
+      {!isLoading && data.posts.edges.length === 0 && <CategoryError/>}
       {!isLoading && data.posts.edges.length > 0 && (
-        <RenderCategories data={data} viewtype={viewtype} />
+        <RenderCategories data={data} viewtype={viewtype}/>
       )}
     </Layout>
   )
@@ -32,7 +32,7 @@ const CategoryError = () => {
     <div>
       <Helmet>
         <title>
-          Category Doesn{"'"}t Exist | Bulletin - Franciscan University of
+          Category Doesn{'\''}t Exist | Bulletin - Franciscan University of
           Steubenville
         </title>
       </Helmet>
@@ -40,9 +40,11 @@ const CategoryError = () => {
     </div>
   )
 }
+const queryParam = 'tutorials'
 
-const RenderCategories = ({ data, searchposts, viewtype }) => {
+const RenderCategories = ({ data, searchposts, viewtype, match }) => {
   const posts = searchposts || data.posts
+
   return (
     <div>
       <Helmet>
@@ -50,7 +52,7 @@ const RenderCategories = ({ data, searchposts, viewtype }) => {
           Posts By Categories | Bulletin - Franciscan University of Steubenville
         </title>
       </Helmet>
-      <GridRenderer posts={posts} viewtype={viewtype} query={getPostsByCat} where={'uncategorized'} />
+      <GridRenderer posts={posts} viewtype={viewtype} query={getPostsByCat} where={''}/>
     </div>
   )
 }
