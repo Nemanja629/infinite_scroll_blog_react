@@ -63,7 +63,7 @@ class GridView extends React.Component {
           </Masonry>
         </div>
         {(this.props.loading) && <h2 >Loading ...</h2>}
-        {!this.state.loadingFinished && <a href={'#'} onClick={this.props.onLoadMore}>Load more</a>}
+        {!this.state.loadingFinished && <a href={'javascript:;'} onClick={this.props.onLoadMore}>Load more</a>}
       </div>
     )
   }
