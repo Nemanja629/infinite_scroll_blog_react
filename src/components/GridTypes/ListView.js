@@ -61,7 +61,7 @@ class ListView extends React.Component {
           </Grid>
         </Grid>
         {(this.props.loading) && <h2>Loading...</h2>}
-        {!this.state.loadingFinished && <a href={'#'} onClick={this.props.onLoadMore}>Load more</a>}
+        {!this.state.loadingFinished && <a href={'javascript:;'} onClick={this.props.onLoadMore}>Load more</a>}
       </div>
     )
   }
