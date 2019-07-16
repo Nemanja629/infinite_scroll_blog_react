@@ -11,12 +11,11 @@ import Error from '../components/Error'
 const Category = ({ data, match, viewtype, searchposts }) =>
   RenderLayout(data, match, searchposts, viewtype)
 const AllPosts = ({ data, viewtype, searchposts }) =>
-  RenderLayout(data, searchposts, viewtype)
+  RenderLayout(data, null, searchposts, viewtype)
 let queryString = ''
 const RenderLayout = (data, match, viewtype) => {
   const isLoading = !data.posts
-  if(match)
-    queryString = match.params.slug
+  if (match) queryString = match.params.slug
   return (
     <Layout>
       {!data.error && isLoading && <Loader />}
@@ -34,7 +33,7 @@ const CategoryError = () => {
     <div>
       <Helmet>
         <title>
-          Category Doesn{'\''}t Exist | Bulletin - Franciscan University of
+          Category Doesn{"'"}t Exist | Bulletin - Franciscan University of
           Steubenville
         </title>
       </Helmet>
@@ -44,7 +43,7 @@ const CategoryError = () => {
 }
 
 const RenderCategories = ({ data, searchposts, viewtype }) => {
-  const posts = searchposts || data.posts
+  const posts = searchposts
 
   return (
     <div>
@@ -53,7 +52,12 @@ const RenderCategories = ({ data, searchposts, viewtype }) => {
           Posts By Categories | Bulletin - Franciscan University of Steubenville
         </title>
       </Helmet>
-      <GridRenderer posts={posts} viewtype={viewtype} query={getPostsByCat} where={queryString} />
+      <GridRenderer
+        posts={posts}
+        viewtype={viewtype}
+        query={getPostsByCat}
+        where={queryString}
+      />
     </div>
   )
 }
