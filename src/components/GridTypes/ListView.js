@@ -9,6 +9,7 @@ class ListView extends React.Component {
 
   componentDidMount () {
     window.addEventListener('scroll', this.handleOnScroll)
+    if (this.props.loadDone) this.setState({ loadingFinished: true })
 
   }
 
